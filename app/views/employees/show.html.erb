@@ -7,3 +7,54 @@
                   method: :delete,
                   data: { confirm: "Are you sure?" } %></li>
 </ul>
+
+<h1>Add a Schedule</h1>
+<%= form_with model: [ @employee, Schedule.new(employee_id: @employee.id) ] do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :schedule_from %><br>
+    <%= form.date_select :schedule_from, start_year: 2021 %>
+  </p>
+
+  <p>
+    <%= form.label :schedule_to %><br>
+    <%= form.date_select :schedule_to, start_year: 2021 %>
+  </p>
+
+  <p>
+    <%= form.label :default_start_time %><br>
+    <%= form.time_select :default_start_time, default: Time.current.change(hour: 9, min: 0) %>
+  </p>
+
+  <p>
+    <%= form.label :default_end_time %><br>
+    <%= form.time_select :default_end_time, default: Time.current.change(hour: 17, min: 0) %>
+  </p>
+
+   <p>
+    <%= form.label :default_break_start %><br>
+    <%= form.time_select :default_break_start, default: Time.current.change(hour: 0, min: 0) %>
+  </p>
+
+  <p>
+    <%= form.label :default_break_end %><br>
+    <%= form.time_select :default_break_end, default: Time.current.change(hour: 0, min: 0) %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+ <h1>Existing Schedules</h1>
+
+ <% @employee.schedules.each do |schedule| %>
+  <ul>
+    <li><%= schedule.title %></li>
+    <li><%= link_to "Edit Schedule", edit_employee_schedule_path(@employee, schedule) %></li>
+  </ul>
+ <% end %>

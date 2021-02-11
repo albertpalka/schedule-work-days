@@ -1,0 +1,40 @@
+<%= form_with( model: @schedule, url: employee_schedule_path, method: "put") do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title, default: @schedule.title %>
+  </p>
+
+  <p>
+    <%= form.label :schedule_from %><br>
+    <%= form.date_select :schedule_from %>
+  </p>
+
+  <p>
+    <%= form.label :schedule_to %><br>
+    <%= form.date_select :schedule_to %>
+  </p>
+
+  <p>
+    <%= form.label :default_start_time %><br>
+    <%= form.time_select :default_start_time  %>
+  </p>
+
+  <p>
+    <%= form.label :default_end_time %><br>
+    <%= form.time_select :default_end_time  %>
+  </p>
+
+   <p>
+    <%= form.label :default_break_start %><br>
+    <%= form.time_select :default_break_start %>
+  </p>
+
+  <p>
+    <%= form.label :default_break_end %><br>
+    <%= form.time_select :default_break_end %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
