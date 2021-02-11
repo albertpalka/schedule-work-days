@@ -25,6 +25,13 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def destroy
+    @schedule = set_schedule
+    @schedule.destroy
+
+    redirect_to employee_path(@schedule.employee_id)
+  end
+
   private
 
   def set_schedule
