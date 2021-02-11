@@ -1,0 +1,9 @@
+<h1><%= @employee.full_name %></h1>
+<h3><%= @employee.id %></h3>
+
+<ul>
+  <li><%= link_to "Edit", edit_employee_path(@employee) %></li>
+  <li><%= link_to "Destroy", employee_path(@employee),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
