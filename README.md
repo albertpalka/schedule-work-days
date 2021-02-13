@@ -1,24 +1,8 @@
-# README
+# KNOWN ISSUES / TODO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Creating schedule for multiple months ahead is "too damn slow". Need to move this out of the controller into a background async job.
+* When editing Schedule, WorkDays are not UPDATED. Need to refactor CreateWorkDay service object.
+* For some reason not all WorkDays are created properly when running the assigned service object. Needs to be reviewed.
+* Viewing schedule with dozens/hundreds of days is too slow on load. Need to implement pagination with some basic search? (TBD)
+* Add API
+* Add specs
