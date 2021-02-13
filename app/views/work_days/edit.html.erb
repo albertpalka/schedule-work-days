@@ -1,0 +1,4 @@
+<h1>Edit Work Day</h1>
+
+<%= render "workday_form", schedule: @work_day %>
+<%= link_to "Back to Schedule", employee_schedule_work_days_path(@work_day.employee_id, @work_day.schedule_id) %>

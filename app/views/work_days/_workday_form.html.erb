@@ -1,0 +1,35 @@
+<%= form_with( model: @work_day, url: employee_schedule_work_day_path, method: "put") do |form| %>
+  <p>
+    <%= form.label :work_date %><br>
+    <%= form.date_select :work_date %>
+  </p>
+
+  <p>
+    <%= form.label :start_time %><br>
+    <%= form.time_select :start_time %>
+  </p>
+
+  <p>
+    <%= form.label :end_time %><br>
+    <%= form.time_select :end_time %>
+  </p>
+
+   <p>
+    <%= form.label :break_start %><br>
+    <%= form.time_select :break_start %>
+  </p>
+
+  <p>
+    <%= form.label :break_end %><br>
+    <%= form.time_select :break_end %>
+  </p>
+
+  <p>
+    <%= form.label :day_type %><br>
+    <%= form.select :day_type, options_for_select(WorkDay.day_types.keys)  %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,7 @@
+<h1>Scheduled Work Days</h2>
+
+<% @work_days.each do |work_day| %>
+  <p><%= work_day.work_date %></p>
+  <p><%= link_to "Edit Work Day", edit_employee_schedule_work_day_path(work_day.employee_id, work_day.schedule_id, work_day.id) %></p>
+  <%= link_to "Back to Employee", employee_path(work_day.employee_id) %>
+<% end %>

@@ -1,5 +1,6 @@
 class Schedule < ApplicationRecord
   belongs_to :employee
+  has_many :work_days, dependent: :destroy
 
   validates :title, presence: true
   validates :title, uniqueness: true

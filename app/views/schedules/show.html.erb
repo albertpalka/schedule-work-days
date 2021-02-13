@@ -1,0 +1,8 @@
+<h1><%= @schedule.title %></h1>
+
+<ul>
+  <li><%= link_to "Edit", edit_employee_schedule_path(@employee, @schedule) %></li>
+  <li><%= link_to "Destroy", schedule_path(@schedule),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>

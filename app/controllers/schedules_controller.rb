@@ -5,7 +5,8 @@ class SchedulesController < ApplicationController
 
   def create
     @employee = Employee.find(params[:employee_id])
-    @schedule = @employee.schedules.create(schedule_params)
+    @schedule = @employee.schedules.create!(schedule_params)
+    CreateWorkDay.new(@schedule).call unless @schedule.nil?
     redirect_to employee_path(@employee)
   end
 

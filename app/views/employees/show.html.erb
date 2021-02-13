@@ -20,5 +20,6 @@
     <li><%= link_to "Destroy", employee_schedule_path(@employee, schedule),
                   method: :delete,
                   data: { confirm: "Are you sure?" } %></li>
+    <li><%= link_to "View Work Days in Schedule", employee_schedule_work_days_path(@employee, schedule) %></li>
   </ul>
 <% end %>

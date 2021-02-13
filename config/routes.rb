@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :employees do
-    resources :schedules
+    resources :schedules do
+      resources :work_days
+    end
   end
 
   root 'employees#index'
