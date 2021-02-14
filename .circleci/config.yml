@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/hix_postgresql
+    working_directory: ~/eengine_app
     docker:
       - image: circleci/ruby:2.7.1
         environment:
