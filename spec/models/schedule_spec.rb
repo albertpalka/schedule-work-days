@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Schedule, type: :model do
-  let(:employee) { FactoryBot.create(:employee) }
-  let(:employees) { create_list(:employee, 5) }
-  let(:schedule) { FactoryBot.create(:schedule, employee_id: employee.id) }
+  let(:schedule) { FactoryBot.create(:schedule) }
 
   context 'validations' do
     subject { schedule }

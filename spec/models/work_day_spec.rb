@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe WorkDay, type: :model do
-  let(:employee) { FactoryBot.create(:employee) }
-  let(:schedule) { FactoryBot.create(:schedule, employee_id: employee.id) }
-  let(:work_day) { FactoryBot.create(:work_day, employee_id: employee.id, schedule_id: schedule.id) }
+  let(:schedule) { FactoryBot.create(:schedule) }
+  let(:work_day) { FactoryBot.build(:work_day) }
 
   context 'validations' do
     subject { work_day }
