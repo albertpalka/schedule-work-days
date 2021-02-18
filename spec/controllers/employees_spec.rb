@@ -23,17 +23,5 @@ RSpec.describe EmployeesController, type: :request do
       get employee_path(employee)
       expect(response).to have_http_status(200)
     end
-
-    # it 'PUT employee' do
-    #   put employee_path(employee.id, full_name: 'Test')
-    #   expect(response).to have_http_status(200)
-    # end
-
-    # it 'POST #new with valid data' do
-    #   post new_employee_path, params: { full_name: 'test' }
-    #   expect(response).to be_redirect
-    # end
-
-    # it 'POST #new with invalid data'
   end
 end
