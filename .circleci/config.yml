@@ -1,70 +1,71 @@
 version: 2.1
 
-executors:
-  default:
-    working_directory: ~/eengine_app
-    docker:
-      - image: circleci/ruby:2.7.1
-        environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_PATH: vendor/bundle
-          BUNDLE_RETRY: 3
-          BUNDLER_VERSION: 2.0.1
-          RAILS_ENV: test
-          DB_HOST: 127.0.0.1
-          PG_HOST: 127.0.0.1
-          PGUSER: eengine_app
-      - image: circleci/postgres:12.0
-        environment:
-          POSTGRES_DB: eengine_app_test
-          POSTGRES_USER: eengine_app
+  executors:
+   default:
+     working_directory: ~/eengine_app
+     docker:
+       - image: circleci/ruby:2.7.1
+         environment:
+           BUNDLE_JOBS: 3
+           BUNDLE_PATH: vendor/bundle
+           BUNDLE_RETRY: 3
+           BUNDLER_VERSION: 2.0.1
+           RAILS_ENV: test
+           DB_HOST: 127.0.0.1
+           PG_HOST: 127.0.0.1
+           PGUSER: eengine_app
+       - image: circleci/postgres:12.0
+         environment:
+           POSTGRES_DB: eengine_app_test
+           POSTGRES_USER: eengine_app
 
-commands:
-  configure_bundler:
-    description: Configure bundler
-    steps:
-      - run:
-          name: Configure bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
+  commands:
+   configure_bundler:
+     description: Configure bundler
+     steps:
+       - run:
+           name: Configure bundler
+           command: |
+             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+             source $BASH_ENV
+             gem install bundler
 
-jobs:
-  build:
-    executor: default
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - eengine_app-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - eengine_app-
-      - configure_bundler
-      - run:
-          name: Install bundle
-          command: bundle install
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
-      - run:
-          name: Setup DB
-          command: bundle exec rails db:create db:schema:load --trace
-      - run:
-          name: RSpec
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format progress
-      - save_cache:
-          key: eengine_app-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./eengine_app
+ jobs:
+   build:
+     executor: default
+     steps:
+       - checkout
+       - restore_cache:
+           keys:
+             - eengine_app-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+             - eengine_app-
+       - configure_bundler
+       - run:
+           name: Install bundle
+           command: bundle install
+       - run:
+           name: Wait for DB
+           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+       - run:
+           name: Setup DB
+           command: bundle exec rails db:create db:schema:load --trace
+       - run:
+           name: RSpec
+           command: |
+             bundle exec rspec --profile 10 \
+                               --format progress
+       - save_cache:
+           key: eengine_app-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+           paths:
+             - vendor/bundle
+       - persist_to_workspace:
+           root: ~/
+           paths:
+             - ./eengine_app
 
-workflows:
-  version: 2
-  integration:
-    jobs:
-      - build
+  workflows:
+   version: 2
+   integration:
+     jobs:
+       - build
+       
