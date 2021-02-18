@@ -20,6 +20,10 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: <%= ENV['DB_PASSWORD'] %>
+  host:  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  port: <%= ENV.fetch('DB_PORT', '5432') %>
 
 development:
   <<: *default
@@ -58,9 +62,6 @@ development:
 test:
   <<: *default
   database: eengine_app_test
-  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
-  username: postgres
-  port: <%= ENV.fetch('DB_PORT', '5432') %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
